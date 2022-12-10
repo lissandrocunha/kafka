@@ -9,9 +9,18 @@ class StrConsumerListener {
 
     private val logger = LogManager.getLogger()
 
-    @KafkaListener(groupId = "group-1", topics = ["str-topic"], containerFactory = "strContainerFactory")
+    @KafkaListener(groupId = "group-0", topics = ["str-topic"], containerFactory = "strContainerFactory")
     fun listener(message: String){
-        logger.info("Receive message {}", message)
+        logger.info("LISTENER ::: Receive message {}", message)
     }
 
+    @KafkaListener(groupId = "group-1", topics = ["str-topic"], containerFactory = "strContainerFactory")
+    fun log(message: String){
+        logger.info("LOG ::: Receive message {}", message)
+    }
+
+    @KafkaListener(groupId = "group-2", topics = ["str-topic"], containerFactory = "strContainerFactory")
+    fun history(message: String){
+        logger.info("HISTORY ::: Receive message {}", message)
+    }
 }
