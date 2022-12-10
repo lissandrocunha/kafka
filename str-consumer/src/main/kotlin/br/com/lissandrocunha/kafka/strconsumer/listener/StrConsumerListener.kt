@@ -2,6 +2,7 @@ package br.com.lissandrocunha.kafka.strconsumer.listener
 
 import br.com.lissandrocunha.kafka.strconsumer.custom.StrConsumerCustomListener
 import org.apache.logging.log4j.LogManager
+import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
@@ -19,7 +20,10 @@ class StrConsumerListener {
         logger.info("LOG ::: Receive message {}", message)
     }
 
-    @StrConsumerCustomListener(groupId = "group-2")
+    @KafkaListener(
+        topics = ["str-topic"],
+        groupId = "group-2",
+        containerFactory = "validMessageContainerFactory")
     fun history(message: String){
         logger.info("HISTORY ::: Receive message {}", message)
     }
