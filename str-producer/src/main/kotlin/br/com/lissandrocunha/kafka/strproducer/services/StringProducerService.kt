@@ -11,12 +11,14 @@ class StringProducerService(val kafkaTemplate: KafkaTemplate<String, String>,) {
     private val logger = LogManager.getLogger()
 
     fun sendMessage(message: String) {
+
+        logger.info("Sending message {}", message)
+
         kafkaTemplate.send("str-topic", message)
             .thenAccept {
                     success: SendResult<String, String>? ->
                         if(success != null){
-                            logger.info("Send message with success {}", message)
-                            logger.info("Partition {}",
+                            logger.info("Message record with success in Partition {}, Offset {}",
                                          success.recordMetadata.partition(),
                                          success.recordMetadata.offset())
                         }
