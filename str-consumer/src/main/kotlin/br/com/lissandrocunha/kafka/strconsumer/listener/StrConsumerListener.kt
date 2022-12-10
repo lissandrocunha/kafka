@@ -4,6 +4,7 @@ import br.com.lissandrocunha.kafka.strconsumer.custom.StrConsumerCustomListener
 import org.apache.logging.log4j.LogManager
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
+import java.lang.IllegalArgumentException
 
 @Component
 class StrConsumerListener {
@@ -18,6 +19,7 @@ class StrConsumerListener {
     @StrConsumerCustomListener(groupId = "group-1")
     fun log(message: String){
         logger.info("LOG ::: Receive message {}", message)
+        throw IllegalArgumentException("EXCEPTION...")
     }
 
     @KafkaListener(

@@ -18,7 +18,11 @@ annotation class StrConsumerCustomListener(
     @get:AliasFor(
         annotation = KafkaListener::class,
         attribute = "groupId"
-    )val groupId:String = ""
+    )val groupId:String = "",
+    @get:AliasFor(
+        annotation = KafkaListener::class,
+        attribute = "errorHandler"
+    )val errorHandler:String = "errorCustomHandler"
 ) {
 
 }
